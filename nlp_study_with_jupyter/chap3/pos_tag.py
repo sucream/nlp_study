@@ -6,7 +6,8 @@ from urllib import parse  # 한글을 올바르게 전달하기 위해 인코딩
 pt = re.compile(r'(?P<text>.+?)\((?P<pos>.+):.+\)')
 # 주로(Noun: 4, 2) 같은 패턴을 text와 pos로 분리해서 사용하기 위한 정규식
 
-def twitter_pos(sentence):
+def twitter_pos(sentence, concat=False):
+    print('[', sentence, '] \n형태소 분석중...', end=' : ')
     sentence = parse.quote(sentence)  # 한글 인코딩
     # print(sentence) 어떻게 변경되는지 확인해보세요
     
@@ -30,6 +31,10 @@ def twitter_pos(sentence):
     for i in response['tokens']:
         m = pt.match(i)
         if m:
-            tokens.append((m.group('text'), m.group('pos')))
-        
+            if concat:
+                tokens.append(m.group('text') + '/' + m.group('pos'))
+            else:
+                tokens.append((m.group('text'), m.group('pos')))
+
+    print('OK\n')
     return tokens
