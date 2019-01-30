@@ -40,7 +40,7 @@ def twitter_pos(sentence, concat=False, time_out=3, discard_stopwords=False, dis
                 if 'Verb' in m.group('pos'):
                     continue
             if discard_stopwords:
-                if m.group('pos') in ('Punctuation', 'Josa'):
+                if m.group('pos') in ('Modifier', 'Suffix', 'Foreign', '(Punctuation', 'Punctuation', 'Josa'):
                     continue
             if concat:
                 tokens.append(m.group('text') + '/' + m.group('pos'))
@@ -71,7 +71,7 @@ def new_pos(sentences, concat=True, time_out=3, discard_stopwords=False, discard
                     if 'Verb' in m.group('pos'):
                         continue
                 if discard_stopwords:
-                    if m.group('pos') in ('Punctuation', 'Josa'):
+                    if m.group('pos') in ('Modifier', 'Suffix', 'Foreign', '(Punctuation', 'Punctuation', 'Josa'):
                         continue
                 if concat:
                     tokens.append(m.group('text') + '/' + m.group('pos'))
