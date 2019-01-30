@@ -1,6 +1,9 @@
 import re
 import requests
+import time
+
 from urllib import parse  # 한글을 올바르게 전달하기 위해 인코딩
+import asyncio
 
 pt = re.compile(r'(?P<text>.+?)\((?P<pos>.+):.+\)')
 
@@ -46,3 +49,44 @@ def twitter_pos(sentence, concat=False, time_out=3, discard_stopwords=False, dis
 
     print('OK\n')
     return tokens
+
+
+def new_pos(sentences, concat=True, time_out=3, discard_stopwords=False, discard_verb=False):
+    start_time = time.time()
+    if type(sentences) == str:
+        print('[ 한 문장 형태소 분석 ]')
+        user_data = [sentences]
+    else:
+        print('[ 다중 문장 형태소 분석 ]')
+        user_data = sentences
+
+    async def get_pos(url):
+        response = await loop.run_in_executor(None, requests.get, url)
+        response = response.json()
+        tokens = []
+        for i in response['tokens']:
+            m = pt.match(i)
+            if m:
+                if discard_verb:
+                    if 'Verb' in m.group('pos'):
+                        continue
+                if discard_stopwords:
+                    if m.group('pos') in ('Punctuation', 'Josa'):
+                        continue
+                if concat:
+                    tokens.append(m.group('text') + '/' + m.group('pos'))
+                else:
+                    tokens.append((m.group('text'), m.group('pos')))
+        return tokens
+
+    async def excute(data):
+        url = 'https://open-korean-text-api.herokuapp.com/tokenize?text={0}'
+        result = [asyncio.ensure_future(get_pos(url.format(sent))) for sent in data]
+        return await asyncio.gather(*result)
+
+    loop = asyncio.get_event_loop()
+    pos_result = loop.run_until_complete(excute(user_data))
+
+    end_time = time.time()
+    print('최종 수행시간:', end_time - start_time)
+    return pos_result
