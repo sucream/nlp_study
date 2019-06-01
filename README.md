@@ -1,8 +1,14 @@
-# NLP 공부한 내용을 올리는 곳입니다.
+# ΨNLP: TT(Training and Techniques)	<br>
+# [Psygrammer](https://www.facebook.com/groups/psygrammer)
+# github 관리자(github id): 김지원(jkim175), 홍남수(sucream), 이윤경(yoonlee78)<br>
 
-- 지극히 개인적인 내용이 올라올 수 있습니다.
-- 누군가에게 도움이 될 수도 있지만 타인이 효율적으로 읽거나 실행할 수 있도록 배려하지 않았습니다.
+## 일정: 격주 목요일 오후 7시 30분 ~ 10시	<br>
 
-#### `Natural Language Processing In Action`이라는 책으로 공부하며, 필요할 경우 추가적인 내용 및 코드 작성 예정
+## 목표: 한국어 자연어처리 데이터 전처리 & 최신 트렌드 훑어보기	<br>
 
-### 남수 공부용
+## 데이터: 각자 자신의 데이터로 분석	<br>
+
+## 운영방식: 1.5~2시간 리드발제자 발표 + 0.5시간 데이터 분석 결과 공유 & 질의응답	<br>
+
+# Syllabus : https://docs.google.com/spreadsheets/d/1IxEt-xPw8HMBiczEExhm2ziyaKbVv71XyBKS1oeD0mw/edit?ts=5cf22fa7#gid=0 <br>
+
